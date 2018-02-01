@@ -3,7 +3,11 @@ from django.urls import reverse #Used to generate URLs by reversing the URL patt
 import uuid # Required for unique book instances
 from django.contrib.auth.models import User
 from datetime import date
-
+from django import forms
+    
+class RenewBookForm(forms.Form):
+    renewal_date = forms.DateField(help_text="Enter a date between now and 4 weeks (default 3).")
+    
 @property
 def is_overdue(self):
     if self.due_back and date.today() > self.due_back:
